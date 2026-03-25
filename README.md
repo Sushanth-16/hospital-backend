@@ -17,10 +17,10 @@ Then run:
 
 ## Deploy on Render
 
-This is a Spring Boot app, not a Node app. Render should use Maven to build and Java to start it.
+This is a Spring Boot app. If Render does not offer Java in the runtime list, deploy it as a Docker service.
 
-- Build command: `./mvnw clean package -DskipTests`
-- Start command: `java -jar target/backend-0.0.1-SNAPSHOT.jar`
+- Runtime: `Docker`
+- Render will build from the repo `Dockerfile`
 
 Required environment variables:
 
