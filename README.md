@@ -28,3 +28,11 @@ Required environment variables:
 - `SPRING_DATASOURCE_USERNAME`
 - `SPRING_DATASOURCE_PASSWORD`
 - `APP_CORS_ALLOWED_ORIGINS`
+
+For Render Postgres, use the database details from your Render database and convert the URL to JDBC format:
+
+```bash
+SPRING_DATASOURCE_URL=jdbc:postgresql://HOST:5432/DATABASE
+SPRING_DATASOURCE_USERNAME=USERNAME
+SPRING_DATASOURCE_PASSWORD=PASSWORD
+```
