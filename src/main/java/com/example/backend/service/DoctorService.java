@@ -30,6 +30,7 @@ public class DoctorService {
 
     public Doctor createDoctor(Doctor doctor) {
         doctor.setConsultationFee(DEFAULT_CONSULTATION_FEE);
+        doctor.setAvailabilitySlots(doctor.getAvailabilitySlots());
         return doctorRepository.save(doctor);
     }
 
@@ -39,6 +40,7 @@ public class DoctorService {
         existingDoctor.setSpecialization(doctor.getSpecialization());
         existingDoctor.setPhone(doctor.getPhone());
         existingDoctor.setEmail(doctor.getEmail());
+        existingDoctor.setAvailabilitySlots(doctor.getAvailabilitySlots());
         existingDoctor.setConsultationFee(DEFAULT_CONSULTATION_FEE);
         return doctorRepository.save(existingDoctor);
     }

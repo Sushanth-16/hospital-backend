@@ -1,8 +1,10 @@
 package com.example.backend.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,10 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.DoctorAvailabilityResponse;
 import com.example.backend.model.Doctor;
+import com.example.backend.service.AppointmentService;
 import com.example.backend.service.DoctorService;
 
 import jakarta.validation.Valid;
@@ -23,9 +28,11 @@ import jakarta.validation.Valid;
 public class DoctorController {
 
     private final DoctorService doctorService;
+    private final AppointmentService appointmentService;
 
-    public DoctorController(DoctorService doctorService) {
+    public DoctorController(DoctorService doctorService, AppointmentService appointmentService) {
         this.doctorService = doctorService;
+        this.appointmentService = appointmentService;
     }
 
     @GetMapping
@@ -36,6 +43,13 @@ public class DoctorController {
     @GetMapping("/{id}")
     public Doctor getDoctorById(@PathVariable Long id) {
         return doctorService.getDoctorById(id);
+    }
+
+    @GetMapping("/{id}/availability")
+    public DoctorAvailabilityResponse getDoctorAvailability(
+            @PathVariable Long id,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return appointmentService.getDoctorAvailability(id, date);
     }
 
     @PostMapping

@@ -38,6 +38,8 @@ public class Doctor {
     @Email(message = "Email must be valid")
     private String email;
 
+    private String availabilitySlots;
+
     @Min(value = 0, message = "Consultation fee must be zero or greater")
     private int consultationFee;
 }
